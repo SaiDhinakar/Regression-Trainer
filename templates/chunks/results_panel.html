@@ -2,7 +2,7 @@
 <div class="bg-gray-800 rounded-xl p-6">
   <h3 class="text-xl font-bold mb-4">Results</h3>
   {% if plot_path %}
-    <img src="{{ url_for('static', filename=plot_path) }}" class="mx-auto border rounded-lg max-h-72 mb-4" alt="Model Plot">
+    <img src="{{ url_for('static', filename=plot_path) }}" class="mx-auto border rounded-lg max-h-4xl mb-4" alt="Model Plot">
   {% else %}
     <p class="text-gray-400">No plot available.</p>
   {% endif %}

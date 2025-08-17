@@ -87,7 +87,7 @@ def train_regression_model(
 
     # Save model in static/uploads
     if output_dir is None:
-        output_dir = os.path.join('static', 'uploads')
+        output_dir = os.path.join("static", "uploads")
     os.makedirs(output_dir, exist_ok=True)
     model_path = os.path.join(output_dir, f"{model_name.replace(' ', '_')}.pkl")
     joblib.dump(model, model_path)
@@ -101,7 +101,7 @@ def train_regression_model(
         model_name,
         feature_to_plot=feature_name,
         target_name=y.name,
-        output_dir=output_dir
+        output_dir=output_dir,
     )
 
     # Return relative paths for frontend
@@ -109,6 +109,6 @@ def train_regression_model(
         "mse": mse,
         "mae": mae,
         "r2": r2,
-        "plot_path": os.path.join('uploads', os.path.basename(plot_path)),
-        "model_path": os.path.join('uploads', os.path.basename(model_path)),
+        "plot_path": os.path.join("uploads", os.path.basename(plot_path)),
+        "model_path": os.path.join("uploads", os.path.basename(model_path)),
     }
