@@ -16,7 +16,7 @@ A modern, interactive web application for training and visualizing regression mo
 
 ## Live Demo
 
-👉 [View the live demo here](https://your-demo-link-here.com)
+👉 [View the live demo here](https://regression-trainer.onrender.com/)
 
 ## Quickstart
 
