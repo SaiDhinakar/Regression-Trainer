@@ -24,8 +24,12 @@ jobs:
         run: |
           pip install -r requirements.txt
           pip install pytest
+      
+      # Step 4: Create uploads directory
+      - name: Create uploads directory
+        run: mkdir -p uploads
 
-      # Step 4: Run unit tests
+      # Step 5: Run unit tests
       - name: Run pytest
         run: pytest tests/
 
