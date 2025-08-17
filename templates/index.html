@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mx-auto py-8 px-2">
+    <div class="flex flex-col md:flex-row gap-8">
+        <!-- Left Column: Model selection, data preview, params -->
+                <div class="w-full md:w-1/2 space-y-8">
+                    <div class="bg-gray-800 rounded-xl p-6">
+                        {% if not show_feature_target_form and not show_model_form %}
+                            <h3 class="text-xl font-bold mb-4">Upload Data</h3>
+                            <form id="upload-form" method="post" enctype="multipart/form-data" class="space-y-6">
+                                <div>
+                                    <label for="csv_file" class="block text-sm font-medium mb-1">Upload CSV</label>
+                                    <input class="block w-full text-sm text-gray-300 bg-gray-700 border border-gray-600 rounded-lg cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500" type="file" id="csv_file" name="csv_file" required>
+                                </div>
+                                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition">Next: Select Columns</button>
+                            </form>
+                        {% elif show_feature_target_form and not show_model_form %}
+                            <h3 class="text-xl font-bold mb-4">Select Feature and Target</h3>
+                            <form id="feature-target-form" method="post" class="space-y-6">
+                                <input type="hidden" name="uploaded_file" value="{{ uploaded_file }}">
+                                <div>
+                                    <label for="feature_col" class="block text-sm font-medium mb-1">Feature Column</label>
+                                    <select class="block w-full bg-gray-700 border border-gray-600 text-gray-200 text-sm rounded-lg p-2.5 focus:ring-2 focus:ring-blue-500" id="feature_col" name="feature_col" required>
+                                        {% for col in columns %}
+                                            <option value="{{ col }}" {% if selected_feature == col %}selected{% endif %}>{{ col }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="target_col" class="block text-sm font-medium mb-1">Target Column</label>
+                                    <select class="block w-full bg-gray-700 border border-gray-600 text-gray-200 text-sm rounded-lg p-2.5 focus:ring-2 focus:ring-blue-500" id="target_col" name="target_col" required>
+                                        {% for col in columns %}
+                                            <option value="{{ col }}" {% if selected_target == col %}selected{% endif %}>{{ col }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition">Show Preview</button>
+                            </form>
+                        {% elif show_model_form %}
+                            <h3 class="text-xl font-bold mb-4">Select Model</h3>
+                            <form id="train-form" method="post" enctype="multipart/form-data" class="space-y-6">
+                                <input type="hidden" name="uploaded_file" value="{{ uploaded_file }}">
+                                <input type="hidden" name="feature_col" value="{{ selected_feature }}">
+                                <input type="hidden" name="target_col" value="{{ selected_target }}">
+                                {% include 'chunks/model_form.html' %}
+                            </form>
+                        {% endif %}
+                    </div>
+                    {% include 'chunks/data_preview.html' %}
+                </div>
+        <!-- Right Column: Final plot, metrics, download -->
+        <div class="w-full md:w-1/2">
+            {% include 'chunks/results_panel.html' %}
+        </div>
+    </div>
+</div>
+{% endblock %}

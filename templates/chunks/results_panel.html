@@ -1,0 +1,24 @@
+<!-- chunk: results_panel.html -->
+<div class="bg-gray-800 rounded-xl p-6">
+  <h3 class="text-xl font-bold mb-4">Results</h3>
+  {% if plot_path %}
+    <img src="{{ url_for('static', filename=plot_path) }}" class="mx-auto border rounded-lg max-h-72 mb-4" alt="Model Plot">
+  {% else %}
+    <p class="text-gray-400">No plot available.</p>
+  {% endif %}
+  <div class="mt-4">
+    <h5 class="font-semibold mb-2">Accuracy Metrics</h5>
+    <ul class="divide-y divide-gray-700">
+      <li class="py-2">MSE: <span class="font-mono">{{ mse if mse is not none else '-' }}</span></li>
+      <li class="py-2">MAE: <span class="font-mono">{{ mae if mae is not none else '-' }}</span></li>
+      <li class="py-2">R²: <span class="font-mono">{{ r2 if r2 is not none else '-' }}</span></li>
+    </ul>
+  </div>
+  <div class="mt-4">
+    {% if model_path %}
+      <a href="{{ url_for('download_model', path=model_path) }}" class="w-full block bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg text-center">Download Model</a>
+    {% else %}
+      <button class="w-full bg-gray-600 text-white py-2 px-4 rounded-lg" disabled>Download Model</button>
+    {% endif %}
+  </div>
+</div>

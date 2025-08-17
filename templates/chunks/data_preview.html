@@ -1,0 +1,9 @@
+<!-- chunk: data_preview.html -->
+<div class="mt-6 bg-gray-800 rounded-xl p-4 text-center">
+  <h2 class="text-lg font-semibold mb-2">Data Preview</h2>
+  {% if data_preview_path %}
+    <img src="{{ url_for('static', filename=data_preview_path) }}" class="mx-auto border rounded-lg max-h-64" alt="Data Preview">
+  {% else %}
+    <p class="text-gray-400">No data preview available.</p>
+  {% endif %}
+</div>

@@ -1,0 +1,10 @@
+<!-- chunk: upload_form.html -->
+<div class="flex flex-col items-center justify-center min-h-screen bg-gray-900">
+  <div class="bg-gray-800 p-8 rounded-2xl shadow-lg w-full max-w-md">
+    <h2 class="text-2xl font-bold mb-6 text-center">Upload your dataset (CSV/TXT)</h2>
+    <form action="/" method="post" enctype="multipart/form-data" class="space-y-4">
+      <input type="file" name="dataset" class="block w-full text-sm text-gray-300 bg-gray-700 border border-gray-600 rounded-lg cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500">
+      <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition">Upload</button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,37 @@
+<!-- chunk: model_form.html -->
+<form id="train-form" method="post" enctype="multipart/form-data" class="space-y-6">
+  <div>
+    <label for="model_name" class="block text-sm font-medium mb-1">Model</label>
+    <select class="block w-full bg-gray-700 border border-gray-600 text-gray-200 text-sm rounded-lg p-2.5 focus:ring-2 focus:ring-blue-500" id="model_name" name="model_name">
+      <option value="Linear Regression">Linear Regression</option>
+      <option value="Polynomial Regression">Polynomial Regression</option>
+      <option value="Random Forest Regressor">Random Forest Regressor</option>
+    </select>
+  </div>
+  <div>
+    <label for="feature_col" class="block text-sm font-medium mb-1">Feature Column(s)</label>
+    <input class="block w-full text-sm text-gray-300 bg-gray-700 border border-gray-600 rounded-lg p-2.5" type="text" id="feature_col" name="feature_col" placeholder="e.g. 0 or feature1,feature2">
+  </div>
+  <div>
+    <label for="target_col" class="block text-sm font-medium mb-1">Target Column</label>
+    <input class="block w-full text-sm text-gray-300 bg-gray-700 border border-gray-600 rounded-lg p-2.5" type="text" id="target_col" name="target_col" placeholder="e.g. -1 or target">
+  </div>
+  <div>
+    <label for="test_size" class="block text-sm font-medium mb-1">Test Size</label>
+    <input class="block w-full text-sm text-gray-300 bg-gray-700 border border-gray-600 rounded-lg p-2.5" type="number" step="0.01" min="0.05" max="0.95" id="test_size" name="test_size" value="0.2">
+  </div>
+  <div id="estimators-group" style="display:none;">
+    <label for="estimators" class="block text-sm font-medium mb-1">Estimators (Random Forest)</label>
+    <input class="block w-full text-sm text-gray-300 bg-gray-700 border border-gray-600 rounded-lg p-2.5" type="number" id="estimators" name="estimators" value="100">
+  </div>
+  <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition">Train Model</button>
+</form>
+<script>
+const modelSelect = document.getElementById('model_name');
+const estimatorsGroup = document.getElementById('estimators-group');
+if (modelSelect) {
+  modelSelect.addEventListener('change', function() {
+    estimatorsGroup.style.display = this.value === 'Random Forest Regressor' ? '' : 'none';
+  });
+}
+</script>
