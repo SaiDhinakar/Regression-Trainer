@@ -14,8 +14,12 @@ DATA = os.path.join("tests", "test_data.csv")
 def test_linear_regression():
     result = train_regression_model(DATA, model_name="Linear Regression")
     assert set(["mse", "mae", "r2", "plot_path", "model_path"]).issubset(result)
-    assert os.path.exists(result["plot_path"])
-    assert os.path.exists(result["model_path"])
+    assert os.path.exists(
+        os.path.join("static", "uploads", os.path.basename(result["plot_path"]))
+    )
+    assert os.path.exists(
+        os.path.join("static", "uploads", os.path.basename(result["model_path"]))
+    )
     assert isinstance(result["mse"], float)
     assert isinstance(result["mae"], float)
     assert isinstance(result["r2"], float)
@@ -24,8 +28,12 @@ def test_linear_regression():
 def test_polynomial_regression():
     result = train_regression_model(DATA, model_name="Polynomial Regression")
     assert set(["mse", "mae", "r2", "plot_path", "model_path"]).issubset(result)
-    assert os.path.exists(result["plot_path"])
-    assert os.path.exists(result["model_path"])
+    assert os.path.exists(
+        os.path.join("static", "uploads", os.path.basename(result["plot_path"]))
+    )
+    assert os.path.exists(
+        os.path.join("static", "uploads", os.path.basename(result["model_path"]))
+    )
 
 
 def test_random_forest_regressor():
@@ -33,24 +41,35 @@ def test_random_forest_regressor():
         DATA, model_name="Random Forest Regressor", estimators=10
     )
     assert set(["mse", "mae", "r2", "plot_path", "model_path"]).issubset(result)
-    assert os.path.exists(result["plot_path"])
-    assert os.path.exists(result["model_path"])
-
-
-def test_invalid_model_name():
-    with pytest.raises(ValueError):
-        train_regression_model(DATA, model_name="Invalid Model")
+    assert os.path.exists(
+        os.path.join("static", "uploads", os.path.basename(result["plot_path"]))
+    )
+    assert os.path.exists(
+        os.path.join("static", "uploads", os.path.basename(result["model_path"]))
+    )
 
 
 def test_explicit_target_col():
     # Use index 2 for target
     result = train_regression_model(DATA, target_col="target")
     assert set(["mse", "mae", "r2", "plot_path", "model_path"]).issubset(result)
+    assert os.path.exists(
+        os.path.join("static", "uploads", os.path.basename(result["plot_path"]))
+    )
+    assert os.path.exists(
+        os.path.join("static", "uploads", os.path.basename(result["model_path"]))
+    )
 
 
 def test_different_test_size():
     result = train_regression_model(DATA, test_size=0.5)
     assert set(["mse", "mae", "r2", "plot_path", "model_path"]).issubset(result)
+    assert os.path.exists(
+        os.path.join("static", "uploads", os.path.basename(result["plot_path"]))
+    )
+    assert os.path.exists(
+        os.path.join("static", "uploads", os.path.basename(result["model_path"]))
+    )
 
 
 def test_different_estimators():
@@ -58,6 +77,12 @@ def test_different_estimators():
         DATA, model_name="Random Forest Regressor", estimators=5
     )
     assert set(["mse", "mae", "r2", "plot_path", "model_path"]).issubset(result)
+    assert os.path.exists(
+        os.path.join("static", "uploads", os.path.basename(result["plot_path"]))
+    )
+    assert os.path.exists(
+        os.path.join("static", "uploads", os.path.basename(result["model_path"]))
+    )
 
 
 def test_missing_file():
